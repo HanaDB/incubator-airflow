@@ -1812,6 +1812,7 @@ class TaskInstance(Base, LoggingMixin):
             self.log.error('Failed to send email to: %s', task.email)
             self.log.exception(e2)
 
+        session.commit()
         # Handling callbacks pessimistically
         try:
             if self.state == State.UP_FOR_RETRY and task.on_retry_callback:
